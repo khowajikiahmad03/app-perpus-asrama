@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head> 
+    <meta charset="UTF-8">
+    <title>Login - PERPUSTAKAAN ASRAMA</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="tab-container">
+    <h2>🔑 Selamat Datang di PERPUSTAKAAN ASRAMA</h2>
+
+    <!-- Tabs -->
+    <ul class="tabs">
+      <li class="active" data-tab="login" onclick="showTab('login')">Login</li>
+      <li data-tab="register" onclick="showTab('register')">Daftar Member</li>
+    </ul>
+
+    <!-- Form Login -->
+    <div class="tab-content active" id="login">
+      <form id="loginForm">
+        <label>Nama Lengkap / ID Member</label>
+        <input type="text" id="login_id" name="login_id" required>
+        <label>Password</label>
+        <input type="password" id="password" name="password" required>
+        <label class="show-pass">
+            <input type="checkbox" onclick="togglePassword('password')">
+            Tampilkan Password
+        </label>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- Form Register -->
+    <div class="tab-content" id="register">
+      <form id="registerForm">
+        <label>ID Member Baru</label>
+        <input type="text" id="reg_member_id" name="member_id" required>
+        <label>Nama Lengkap</label>
+        <input type="text" id="reg_nama" name="nama" required>
+        <label>Password</label>
+        <input type="password" id="regPass" name="password" required>
+        <label>Ulangi Password</label>
+        <input type="password" id="regPassConfirm" name="password_confirm" required>
+        <label class="show-pass">
+            <input type="checkbox" onclick="togglePassword('regPass'); togglePassword('regPassConfirm')">
+            Tampilkan Password
+        </label>
+        <button type="submit">Daftar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      document.querySelectorAll('.tabs li').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.tabs li[data-tab="${tabId}"]`).classList.add('active');
+    }
+  </script>
+</body> 
+</html>

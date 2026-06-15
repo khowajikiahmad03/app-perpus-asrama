@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>PERPUS ASRAMA</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<div class="container">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">📚 PERPUS ASRAMA</div>
+    <ul>
+      <li><a href="#" onclick="showPage('dashboardPage')">🏠 Dashboard</a></li>
+      <li><a href="#" onclick="showPage('bukuPage')">📖 Buku</a></li>
+      <li>
+        <a href="#" onclick="toggleSubmenu()">📋 Data Transaksi ▾</a>
+        <ul class="submenu" id="submenu">
+          <li><a href="#" onclick="showPage('peminjamanPage')">↳ Peminjaman</a></li>
+          <li><a href="#" onclick="showPage('pengembalianPage')">↳ Pengembalian</a></li>
+          <li><a href="#" onclick="showPage('riwayatPage')">↳ Riwayat</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <section id="dashboardPage" class="content">
+      <h2 class="page-title">🏠 Dashboard</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">📕</div>
+          <div class="card-info">
+            <div class="card-label">Buku Novel</div>
+            <div class="card-value" id="countNovel">0</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📗</div>
+          <div class="card-info">
+            <div class="card-label">Ilmu Pengetahuan & Sejarah</div>
+            <div class="card-value" id="countIptek">0</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📘</div>
+          <div class="card-info">
+            <div class="card-label">Kitab</div>
+            <div class="card-value" id="countKitab">0</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUKU -->
+    <section id="bukuPage" class="content" style="display:none;">
+      <h2 class="page-title">📖 Buku</h2>
+      <form id="formBuku" class="form-container">
+        <input id="judulbuku" placeholder="Judul Buku" required>
+        <input id="penulis" placeholder="Penulis">
+        <select id="kategori" required>
+          <option value="">-- Pilih Kategori --</option>
+          <option value="Novel">Novel</option>
+          <option value="Ilmu Pengetahuan & Sejarah">Ilmu Pengetahuan & Sejarah</option>
+          <option value="Kitab">Kitab</option>
+        </select>
+        <input id="stok" type="number" placeholder="Stok" min="0">
+        <button id="btnSimpan" type="submit" class="btn btn-primary">💾 Simpan</button>
+        <button type="button" id="btnBatal" class="btn btn-secondary" style="display:none;" onclick="batalEditBuku()">✖ Batal</button>
+      </form>
+      <input id="searchInput" placeholder="Cari judul/penulis...">
+      <div style="margin:10px 0;">
+        <button class="filter-btn active" onclick="filterKategori('',this)">Semua</button>
+        <button class="filter-btn" onclick="filterKategori('Novel',this)">Novel</button>
+        <button class="filter-btn" onclick="filterKategori('Ilmu Pengetahuan & Sejarah',this)">Ilmu Pengetahuan & Sejarah</button>
+        <button class="filter-btn" onclick="filterKategori('Kitab',this)">Kitab</button>
+      </div>
+      <table class="styled-table">
+        <thead>
+          <tr><th>No</th><th>Judul</th><th>Penulis</th><th>Kategori</th><th>Stok</th><th>Status</th><th>Aksi</th></tr>
+        </thead>
+        <tbody id="tabelBuku"></tbody>
+      </table>
+      <div id="emptyMsg" style="display:none; text-align:center; color:#888; margin-top:12px;">Tidak ada data buku.</div>
+    </section>
+
+    <!-- PEMINJAMAN -->
+    <section id="peminjamanPage" class="content" style="display:none;">
+      <h2 class="page-title">📚 Peminjaman</h2>
+      <form id="loanForm" class="form-grid">
+        <input id="namaPinjam" placeholder="Nama Peminjam" required>
+        <input id="judulpinjam" placeholder="Judul Buku" required>
+        <input id="tanggalPinjam" type="date" required>
+        <button type="submit" class="btn btn-primary">💾 Simpan</button>
+      </form>
+      <div id="loanError" class="error-msg" style="display:none;"></div>
+      <table id="loanTable" class="styled-table">
+        <thead>
+          <tr>
+            <th>No</th><th>ID Pinjam</th><th>Nama</th><th>Judul Buku</th><th>Tanggal Pinjam</th><th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- PENGEMBALIAN -->
+    <section id="pengembalianPage" class="content" style="display:none;">
+      <h2 class="page-title">📋 Pengembalian</h2>
+      <form id="returnForm" class="form-grid">
+        <input id="idPinjamKembali" type="number" placeholder="ID Peminjaman" required>
+        <input id="tanggalKembali" type="date" required>
+        <button type="submit" class="btn btn-primary">💾 Simpan</button>
+      </form>
+      <div id="returnError" class="error-msg" style="display:none;"></div>
+      <table id="returnTable" class="styled-table">
+        <thead>
+          <tr><th>No</th><th>ID Pinjam</th><th>Nama</th><th>Judul Buku</th><th>Tgl Kembali</th><th>Aksi</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- RIWAYAT -->
+    <section id="riwayatPage" class="content" style="display:none;">
+      <h2 class="page-title">📜 Riwayat</h2>
+      <table id="historyTable" class="styled-table">
+        <thead>
+          <tr>
+            <th>No</th><th>Nama</th><th>Judul Buku</th><th>Tanggal Pinjam</th><th>Tanggal Kembali</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="emptyRiwayat" style="display:none; text-align:center; color:#888; margin-top:12px;">Belum ada riwayat.</div>
+    </section>
+
+  </div>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>
