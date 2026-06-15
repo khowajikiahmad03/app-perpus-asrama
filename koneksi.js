@@ -1,13 +1,12 @@
 require('dotenv').config();
 const mysql = require('mysql2');
 
-// === KONEKSI DB ===
 const db = mysql.createConnection({
-  host:     process.env.MYSQLHOST,
-  port:     process.env.MYSQLPORT || 3306,
-  user:     process.env.MYSQLUSER,
+  host:     process.env.MYSQLHOST || 'mysql.railway.internal',
+  port:     parseInt(process.env.MYSQLPORT) || 3306,
+  user:     process.env.MYSQLUSER || 'root',
   password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE
+  database: process.env.MYSQLDATABASE || 'railway'
 });
 
 db.connect(err => {
