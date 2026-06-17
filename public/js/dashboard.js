@@ -1,8 +1,4 @@
-// ========================
-//   DASHBOARD.JS
-// ========================
-
-// === NAVIGASI & SUBMENU ===
+// fungsi untuk toggle submenu di sidebar
 function toggleSubmenu() {
   const submenu = document.getElementById('submenu');
   submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
@@ -26,7 +22,7 @@ function showError(elId, msg) {
   if (msg) console.warn('[ERROR] ' + elId + ':', msg);
 }
 
-// === FORMAT TANGGAL (DD-MM-YYYY) ===
+// format tanggal dari hari-bulan-tahun
 function formatTanggal(tgl) {
   if (!tgl) return '-';
   const d = new Date(tgl);
@@ -37,9 +33,7 @@ function formatTanggal(tgl) {
   return `${day}-${month}-${year}`;
 }
 
-// ========================
-//   DASHBOARD
-// ========================
+// dashboard
 async function updateDashboard() {
   console.log('[DASHBOARD] Update kartu statistik...');
   try {
@@ -58,9 +52,7 @@ async function updateDashboard() {
   }
 }
 
-// ========================
-//   BUKU
-// ========================
+// menu buku
 let dataBuku    = [];
 let filterAktif = '';
 let editIdBuku  = null;
@@ -209,9 +201,7 @@ async function hapusBuku(id) {
   }
 }
 
-// ========================
-//   PEMINJAMAN
-// ========================
+// menu peminjaman
 document.getElementById('loanForm').addEventListener('submit', async e => {
   e.preventDefault();
   showError('loanError', '');
@@ -302,9 +292,7 @@ async function hapusPinjam(id) {
   }
 }
 
-// ========================
-//   PENGEMBALIAN
-// ========================
+// menu pengembalian
 document.getElementById('returnForm').addEventListener('submit', async e => {
   e.preventDefault();
   showError('returnError', '');
@@ -350,7 +338,7 @@ async function loadPengembalian() {
     console.log('[PENGEMBALIAN] Data berhasil dimuat, jumlah:', rows.length);
     const tbody = document.querySelector('#returnTable tbody');
     if (rows.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#888;">Tidak ada data pengembalian.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">Tidak ada data pengembalian.</td></tr>';
       return;
     }
     tbody.innerHTML = rows.map((r, i) => `
@@ -385,9 +373,7 @@ async function hapusKembali(id) {
   }
 }
 
-// ========================
-//   RIWAYAT
-// ========================
+// menu riwayat
 async function loadRiwayat() {
   console.log('[RIWAYAT] loadRiwayat dipanggil...');
   try {
@@ -417,9 +403,7 @@ async function loadRiwayat() {
   }
 }
 
-// ========================
-//   INIT
-// ========================
+// urutan proses halaman dimuat
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('[INIT] Halaman dimuat, inisialisasi...');
   showPage('dashboardPage');
