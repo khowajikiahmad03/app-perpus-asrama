@@ -131,12 +131,3 @@ button[type="submit"]:hover {
 button[type="submit"]:active {
   background-color: #162240;
 }
-
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
