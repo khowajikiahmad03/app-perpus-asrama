@@ -1,10 +1,10 @@
-// Toggle password
+// fitur tampilkanpassword
 function togglePassword(id) {
   var input = document.getElementById(id);
   input.type = (input.type === 'password') ? 'text' : 'password';
 }
 
-// Login
+// form login
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const login_id = document.getElementById('login_id').value;
@@ -25,7 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   }
 });
 
-// Register
+// form pendaftaran
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const member_id = document.getElementById('reg_member_id').value;
