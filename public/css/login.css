@@ -140,39 +140,3 @@ body {
   align-items: center;
   height: 100vh;
 }
-
-.login-container {
-  background: #fff;
-  padding: 28px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  width: 300px;
-  text-align: center;
-}
-
-.login-container h2 {
-  margin-bottom: 20px;
-  color: #2c3e6b;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  background: #2c3e6b;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.login-container button:hover {
-  background: #3d56a0;
-}
