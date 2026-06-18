@@ -10,9 +10,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// ========================
-//   LOGIN & REGISTER
-// ========================
+// login dan daftar
 app.post('/register', (req, res) => {
   const { member_id, nama, password, role } = req.body;
   console.log('[REGISTER] Request:', { member_id, nama, role });
@@ -52,9 +50,7 @@ app.post('/login', (req, res) => {
   );
 });
 
-// ========================
-//   BUKU
-// ========================
+// menu buku
 app.get('/buku', (req, res) => {
   console.log('[BUKU] GET semua buku');
   db.query('SELECT * FROM buku', (err, rows) => {
@@ -117,9 +113,7 @@ app.delete('/buku/:id', (req, res) => {
   });
 });
 
-// ========================
-//   PEMINJAMAN
-// ========================
+// menu peminjaman
 app.get('/peminjaman', (req, res) => {
   console.log('[PEMINJAMAN] GET semua peminjaman');
   const sql = `
@@ -227,9 +221,7 @@ app.delete('/peminjaman/:id', (req, res) => {
   });
 });
 
-// ========================
-//   PENGEMBALIAN
-// ========================
+// menu pengembalian
 app.get('/pengembalian', (req, res) => {
   console.log('[PENGEMBALIAN] GET semua pengembalian');
   const sql = `
@@ -333,9 +325,7 @@ app.delete('/pengembalian/:id', (req, res) => {
   });
 });
 
-// ========================
-//   RIWAYAT
-// ========================
+// menu riwayat
 app.get('/riwayat', (req, res) => {
   console.log('[RIWAYAT] GET semua riwayat');
   db.query('SELECT * FROM riwayat ORDER BY id_riwayat DESC', (err, rows) => {
@@ -348,8 +338,6 @@ app.get('/riwayat', (req, res) => {
   });
 });
 
-// ========================
-//   START SERVER
-// ========================
+// server start
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`[SERVER] Running on port ${PORT}`));
